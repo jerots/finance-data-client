@@ -9,12 +9,12 @@ import LinearIndeterminate from './components/LinearIndeterminate';
 import * as _ from "lodash";
 
 const LOAD_TICKER = gql`
- query Ticker($tickerName: String!){
+ query ($tickerName: String!){
           ticker(tickerName:$tickerName)
         }
 `
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       tickerName: "AAPL"
@@ -25,8 +25,8 @@ class App extends Component {
 
   handleChange(event) {
     const value = event.target.value;
-    if (!value || !value.trim() ) return
-    this.debouncedSetState({tickerName: value})
+    if (!value || !value.trim()) return
+    this.debouncedSetState({ tickerName: value })
   }
 
 
@@ -34,15 +34,20 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <div className="App">
-          <Query query={LOAD_TICKER} variables={{tickerName:this.state.tickerName}}>
+          <HeaderBar handleChange={this.handleChange} />
+          <Query query={LOAD_TICKER} variables={{ tickerName: this.state.tickerName }}>
             {({ loading, error, data }) => {
 
-              // if (error) return <p>Error :(</p>;
+              const dataArr = _.get(data, "ticker.data");
+              if (!dataArr) return <p>Stock not found</p>;
+
+              const ticker = dataArr[0];
+
+              if (error || !ticker) return <p>Stock not found</p>;
 
               return (
                 <div>
-                  <HeaderBar handleChange={this.handleChange} />
-                  { loading ? <LinearIndeterminate varient="indeterminate"/> : <MainPage ticker={data} /> }
+                  {loading ? <LinearIndeterminate varient="indeterminate" /> : <MainPage ticker={ticker} />}
                 </div>
               )
             }}
