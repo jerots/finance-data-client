@@ -25,7 +25,7 @@ class App extends Component {
 
   handleChange(event) {
     const value = event.target.value;
-    if (!value || !value.trim()) return
+    if (!value || !value.trim() ) return
     this.debouncedSetState({tickerName: value})
   }
 
