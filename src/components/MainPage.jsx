@@ -2,22 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TradingViewWidget, { Themes } from 'react-tradingview-widget';
+import { Grid, CardContent, Card } from '@material-ui/core';
 
 const styles = theme => ({
-
+  fullheight: {
+    height: "100%"
+  }
 });
 
 function MainPage(props) {
-  const { ticker} = props;
+  const { classes, ticker } = props;
   console.log(ticker)
   return (
-    <div>
-      <h1>{ticker.companyName.toUpperCase()}</h1>
-      <h2>Price: ${ticker.price} {ticker.ChangesPerc}</h2>
-      <h2>Intrinsic Value (DCF): ${ticker.DCF}</h2>
-      <p>{ticker.description}</p>
-      <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} />
-
+    <div className={classes.root}>
+      <Grid container spacing={24}>
+        <Grid item xs={3}>
+          <Card className={classes.fullheight}>
+            <CardContent>
+              <h1>{ticker.companyName.toUpperCase()}</h1>
+              <h2>Price: ${ticker.price} {ticker.ChangesPerc}</h2>
+              <h2>Intrinsic Value (DCF): ${ticker.DCF}</h2>
+              <p>{ticker.description}</p>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={9}>
+          <Card className={classes.fullheight}>
+            <CardContent>
+              <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </div>
   );
 }
