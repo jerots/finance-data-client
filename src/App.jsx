@@ -42,6 +42,7 @@ class App extends Component {
               if (!dataArr) return <p>Stock not found</p>;
 
               const ticker = dataArr[0];
+              ticker.symbol = data.ticker.name
 
               if (error || !ticker) return <p>Stock not found</p>;
 
