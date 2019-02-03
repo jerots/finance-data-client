@@ -15,8 +15,8 @@ function MainPage(props) {
   console.log(ticker)
   return (
     <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={3}>
+      <Grid container spacing={16}>
+        <Grid item xs={12} sm={12}>
           <Card className={classes.fullheight}>
             <CardContent>
               <h1>{ticker.companyName.toUpperCase()}</h1>
@@ -26,7 +26,7 @@ function MainPage(props) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={9} md={6}>
           <Card className={classes.fullheight}>
             <CardContent>
               <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} />
