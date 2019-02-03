@@ -76,7 +76,7 @@ function SearchAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            Superfin
+            S U P E R F I N
           </Typography>
           <div className={classes.grow} />
           <div className={classes.search}>

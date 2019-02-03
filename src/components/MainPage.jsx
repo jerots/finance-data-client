@@ -26,7 +26,7 @@ function MainPage(props) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={9} md={6}>
+        <Grid item xs={12}>
           <Card className={classes.fullheight}>
             <CardContent>
               <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} />
