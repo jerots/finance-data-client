@@ -34,37 +34,37 @@ class App extends Component {
 
   render() {
     return (
-    <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
 
-      <ApolloProvider client={client}>
-        <div className="App">
-          <HeaderBar handleChange={this.handleChange} />
-          <Query query={LOAD_TICKER} variables={{ tickerName: this.state.tickerName }}>
-            {({ loading, error, data }) => {
+        <ApolloProvider client={client}>
+          <div className="App">
+            <HeaderBar handleChange={this.handleChange} />
+            <Query query={LOAD_TICKER} variables={{ tickerName: this.state.tickerName }}>
+              {({ loading, error, data }) => {
 
-              const dataArr = _.get(data, "ticker.data");
-              if (!dataArr) return <p>Stock not found</p>;
+                const dataArr = _.get(data, "ticker.data");
+                if (!dataArr) return <p>Stock not found</p>;
 
-              const ticker = dataArr[0];
-              ticker.symbol = data.ticker.name
+                const ticker = dataArr[0];
+                ticker.symbol = data.ticker.name
 
-              if (error || !ticker) return <p>Stock not found</p>;
+                if (error || !ticker) return <p>Stock not found</p>;
 
-              return (
-                <div>
-                  {loading ? <LinearIndeterminate varient="indeterminate" /> : <MainPage ticker={ticker} />}
-                </div>
-              )
-            }}
+                return (
+                  <div>
+                    {loading ? <LinearIndeterminate varient="indeterminate" /> : <MainPage ticker={ticker} />}
+                  </div>
+                )
+              }}
 
 
-          </Query>
-          <div>
+            </Query>
+            <div>
 
+            </div>
           </div>
-        </div>
-      </ApolloProvider>
-    </MuiThemeProvider>
+        </ApolloProvider>
+      </MuiThemeProvider>
 
     );
   }
