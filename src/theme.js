@@ -9,5 +9,8 @@ export default createMuiTheme({
       secondary: {
         main: '#00C284',
       },
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
