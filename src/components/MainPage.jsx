@@ -7,6 +7,9 @@ import { Grid, CardContent, Card } from '@material-ui/core';
 const styles = theme => ({
   fullheight: {
     height: "100%"
+  },
+  tradingviewwidget: {
+    height: "500px"
   }
 });
 
@@ -26,10 +29,10 @@ function MainPage(props) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={12} md={9} lg={6}>
           <Card className={classes.fullheight}>
-            <CardContent>
-              <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} />
+            <CardContent className={classes.tradingviewwidget}>
+              <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} autosize />
             </CardContent>
           </Card>
         </Grid>
