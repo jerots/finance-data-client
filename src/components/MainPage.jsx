@@ -15,16 +15,15 @@ const styles = theme => ({
 
 function MainPage(props) {
   const { classes, ticker } = props;
-  console.log(ticker)
   return (
     <div className={classes.root}>
       <Grid container spacing={16}>
         <Grid item xs={12} sm={12}>
           <Card className={classes.fullheight}>
             <CardContent>
-              <h1>{ticker.companyName.toUpperCase()}</h1>
-              <h2>Price: ${ticker.price} {ticker.ChangesPerc}</h2>
-              <h2>Intrinsic Value (DCF): ${ticker.DCF}</h2>
+              <h1>{ticker.profile.companyName.toUpperCase()}</h1>
+              <h2>Price: ${ticker.profile.price} {ticker.profile.ChangesPerc}</h2>
+              <h2>Intrinsic Value (DCF): ${ticker.dcf}</h2>
               <p>{ticker.description}</p>
             </CardContent>
           </Card>

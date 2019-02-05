@@ -12,7 +12,16 @@ import theme from './theme';
 
 const LOAD_TICKER = gql`
  query ($tickerName: String!){
-          ticker(tickerName:$tickerName)
+    ticker(tickerName:$tickerName) {
+      name
+      dcf
+      incomeStatement
+      balanceSheet
+      dcf
+      rating
+      cashFlowStatement
+      profile
+    }
         }
 `
 class App extends Component {
@@ -41,14 +50,10 @@ class App extends Component {
             <HeaderBar handleChange={this.handleChange} />
             <Query query={LOAD_TICKER} variables={{ tickerName: this.state.tickerName }}>
               {({ loading, error, data }) => {
-
-                const dataArr = _.get(data, "ticker.data");
-                if (!dataArr) return <p>Stock not found</p>;
-
-                const ticker = dataArr[0];
-                ticker.symbol = data.ticker.name
-
-                if (error || !ticker) return <p>Stock not found</p>;
+                const ticker = _.get(data, "ticker");
+                if (!ticker || error) return <p>Stock not found</p>;
+                
+                ticker.symbol = ticker.name
 
                 return (
                   <div>

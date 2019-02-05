@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import ApolloClient from "apollo-boost";
 
 export const client = new ApolloClient({
-  uri: "https://api.sonofong.com/"
+  uri: process.env.NODE_ENV === "production" ? "https://api.sonofong.com/" : "http://localhost:4000/"
 });
 
 
