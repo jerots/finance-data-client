@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": 1,
     "Image": {
-        "Name": "880343418850.dkr.ecr.ap-southeast-1.amazonaws.com/finance-data-client:release-0.3"
+        "Name": "880343418850.dkr.ecr.ap-southeast-1.amazonaws.com/finance-data-client:release-0.3.1"
     },
     "Ports": [
         {
