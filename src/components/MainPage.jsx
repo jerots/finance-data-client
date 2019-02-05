@@ -22,7 +22,7 @@ function MainPage(props) {
           <Card className={classes.fullheight}>
             <CardContent>
               <h1>{ticker.profile.companyName.toUpperCase()}</h1>
-              <h2>Price: ${ticker.profile.price} {ticker.profile.ChangesPerc}</h2>
+              <h2>Price: ${ticker.profile.Price} {ticker.profile.ChangesPerc}</h2>
               <h2>Intrinsic Value (DCF): ${ticker.dcf}</h2>
               <p>{ticker.description}</p>
             </CardContent>
