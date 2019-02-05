@@ -20,9 +20,6 @@ COPY . .
 
 RUN npm run build
 
-# Bundle app source
-COPY ./build ./build
-
 EXPOSE 5000
 
 ENV NODE_ENV production
