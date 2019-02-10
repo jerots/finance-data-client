@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 import { Grid, CardContent, Card } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
 
 const styles = theme => ({
   fullheight: {
@@ -24,7 +23,6 @@ function MainPage(props) {
   const { classes, ticker } = props;
 
   const positive = (num) => {
-    console.log(num);
     return num > 0;
   };
   
