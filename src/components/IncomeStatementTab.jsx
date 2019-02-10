@@ -3,8 +3,13 @@ import { withStyles, Grid, Card, CardContent, Paper, Table, TableHead, TableRow,
 
 const styles = theme => ({
     root: {
-
-    },
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+      },
+      table: {
+        minWidth: 700,
+      },
 });
 
 function IncomeStatementTab(props) {
@@ -18,7 +23,7 @@ function IncomeStatementTab(props) {
         <Grid item xs={12} sm={12} md={12} lg={12}>
             <Card className={classes.fullheight}>
                 <CardContent className={classes.tradingviewwidget}>
-                    <Paper>
+                    <Paper className={classes.root}>
                         <Table>
                             <TableHead>
                                 <TableRow>

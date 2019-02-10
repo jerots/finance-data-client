@@ -19,7 +19,7 @@ function CashFlowStatement(props) {
         <Grid item xs={12} sm={12} md={12} lg={12}>
             <Card className={classes.fullheight}>
                 <CardContent className={classes.tradingviewwidget}>
-                    <Paper>
+                    <Paper className={classes.root}>
                         <Table>
                             <TableHead>
                                 <TableRow>
