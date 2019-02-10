@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 import { Grid, CardContent, Card } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
+import { Button } from 'antd';
 
 const styles = theme => ({
   fullheight: {
@@ -37,6 +37,7 @@ function MainPage(props) {
   
   return (
     <div className={classes.root}>
+    <Button type="primary">BUTTON</Button>
       <Grid container spacing={16}>
         <Grid item xs={12} sm={12}>
           <Card className={classes.fullheight}>

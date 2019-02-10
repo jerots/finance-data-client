@@ -7,8 +7,6 @@ import gql from "graphql-tag"
 import MainPage from './components/MainPage';
 import LinearIndeterminate from './components/LinearIndeterminate';
 import * as _ from "lodash";
-import { MuiThemeProvider } from '@material-ui/core';
-import theme from './theme';
 
 const LOAD_TICKER = gql`
  query ($tickerName: String!){
@@ -43,7 +41,7 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
+
 
         <ApolloProvider client={client}>
           <div className="App">
@@ -75,7 +73,6 @@ class App extends Component {
             </div>
           </div>
         </ApolloProvider>
-      </MuiThemeProvider>
 
     );
   }
