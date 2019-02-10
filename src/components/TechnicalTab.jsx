@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles, Grid, Card, CardContent } from '@material-ui/core';
+import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 
 const styles = theme => ({
     root: {
@@ -10,19 +11,19 @@ const styles = theme => ({
     },
 });
 
-function IncomeStatementTab(props) {
-    const { classes } = props;
+function TechnicalTab(props) {
+    const { classes, ticker } = props;
 
     return (
 
         <Grid item xs={12} sm={12} md={9} lg={6}>
             <Card className={classes.fullheight}>
                 <CardContent className={classes.tradingviewwidget}>
-                    <h1>Income statement table here</h1>
+                    <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} autosize />
                 </CardContent>
             </Card>
         </Grid>
     );
 }
 
-export default withStyles(styles)(IncomeStatementTab);
+export default withStyles(styles)(TechnicalTab);

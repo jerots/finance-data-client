@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core';
 import IncomeStatementTab from './IncomeStatementTab';
 import { Query, ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
+import TechnicalTab from './TechnicalTab';
 
 function TabContainer(props) {
     return (
@@ -46,6 +47,7 @@ function SimpleTabs(props) {
                             <ApolloConsumer>
                                 {client => (
                                     <Tabs value={tabValue} onChange={(event, newValue) => client.writeData({data: { tabValue: newValue }})}>
+                                        <Tab label="Technical Tab" />
                                         <Tab label="Income Statement" />
                                         <Tab label="Balance Sheet" />
                                         <Tab label="Cashflow statement" />
@@ -53,9 +55,10 @@ function SimpleTabs(props) {
                                 )}
                             </ApolloConsumer>
                         </AppBar>
-                        {tabValue === 0 && <TabContainer><IncomeStatementTab ticker={ticker} /></TabContainer>}
-                        {tabValue === 1 && <TabContainer>Balance Sheet</TabContainer>}
-                        {tabValue === 2 && <TabContainer>Cashflow statement</TabContainer>}
+                        {tabValue === 0 && <TabContainer><TechnicalTab ticker={ticker} /></TabContainer>}
+                        {tabValue === 1 && <TabContainer><IncomeStatementTab ticker={ticker} /></TabContainer>}
+                        {tabValue === 2 && <TabContainer>Balance Sheet</TabContainer>}
+                        {tabValue === 3 && <TabContainer>Cashflow statement</TabContainer>}
                     </div>
                 )}
             </Query>
