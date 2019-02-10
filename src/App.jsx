@@ -51,7 +51,6 @@ class App extends Component {
             <Query query={LOAD_TICKER} variables={{ tickerName: this.state.tickerName }}>
               {({ loading, error, data }) => {
                 const ticker = _.get(data, "ticker");
-                console.log(loading, ticker, error)
 
                 if (loading) {
                   return <LinearIndeterminate varient="indeterminate" />
