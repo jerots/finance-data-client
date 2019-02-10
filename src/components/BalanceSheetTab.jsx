@@ -3,8 +3,10 @@ import { withStyles, Grid, Card, CardContent, Paper, Table, TableHead, TableRow,
 
 const styles = theme => ({
     root: {
-
-    },
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+      },
 
 });
 
