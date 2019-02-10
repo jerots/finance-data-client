@@ -13,7 +13,7 @@ const styles = theme => ({
 function CashFlowStatement(props) {
     const { classes, ticker: { profile: { companyName }, cashFlowStatement } } = props;
     console.log(cashFlowStatement);
-    const years = Object.keys(cashFlowStatement["Accounts payable"]);
+    const years = Object.keys(cashFlowStatement["Accounts payable"]).reverse();
     // const rows = ["Revenue", "Net income"];
     const rows = Object.keys(cashFlowStatement);
     return (

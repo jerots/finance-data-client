@@ -13,7 +13,7 @@ const styles = theme => ({
 function BalanceSheetTab(props) {
     const { classes, ticker: { profile: { companyName }, balanceSheet } } = props;
     console.log(balanceSheet);
-    const years = Object.keys(balanceSheet["Accounts payable"]);
+    const years = Object.keys(balanceSheet["Accounts payable"]).reverse();
     // const rows = ["Revenue", "Net income"];
     const rows = Object.keys(balanceSheet);
     return (

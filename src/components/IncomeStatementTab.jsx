@@ -12,7 +12,7 @@ const styles = theme => ({
 function IncomeStatementTab(props) {
     const { classes, ticker: { profile: {companyName}, incomeStatement } } = props;
     console.log(incomeStatement);
-    const years = Object.keys(incomeStatement.Basic);
+    const years = Object.keys(incomeStatement.Basic).reverse();
     // const rows = ["Revenue", "Net income"];
     const rows = Object.keys(incomeStatement);
     return (
