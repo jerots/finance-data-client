@@ -6,6 +6,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
 import IncomeStatementTab from './IncomeStatementTab';
+import { Query, ApolloConsumer } from 'react-apollo';
+import gql from 'graphql-tag';
 
 function TabContainer(props) {
     return (
@@ -26,26 +28,39 @@ const styles = theme => ({
     },
 });
 
+const GET_TAB_VALUE = gql`
+    {
+        tabValue @client
+    }
+`
+
 function SimpleTabs(props) {
     const { classes, ticker } = props;
-    let value = 0;
-    function handleChange(event, newValue) {
-        value = newValue;
-        console.log(newValue)
-    }
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
-                <Tabs value={value} onChange={handleChange}>
-                    <Tab label="Income Statement" />
-                    <Tab label="Balance Sheet" />
-                    <Tab label="Cashflow statement" />
-                </Tabs>
-            </AppBar>
-            {value === 0 && <TabContainer><IncomeStatementTab ticker={ticker}/></TabContainer>}
-            {value === 1 && <TabContainer>Balance Sheet</TabContainer>}
-            {value === 2 && <TabContainer>Cashflow statement</TabContainer>}
+            <Query query={GET_TAB_VALUE}>
+                {({ data: { tabValue } }) => (
+                    <div>
+                        <AppBar position="static">
+                            <ApolloConsumer>
+                                {client => (
+                                    <Tabs value={tabValue} onChange={(event, newValue) => client.writeData({data: { tabValue: newValue }})}>
+                                        <Tab label="Income Statement" />
+                                        <Tab label="Balance Sheet" />
+                                        <Tab label="Cashflow statement" />
+                                    </Tabs>
+                                )}
+                            </ApolloConsumer>
+                        </AppBar>
+                        {tabValue === 0 && <TabContainer><IncomeStatementTab ticker={ticker} /></TabContainer>}
+                        {tabValue === 1 && <TabContainer>Balance Sheet</TabContainer>}
+                        {tabValue === 2 && <TabContainer>Cashflow statement</TabContainer>}
+                    </div>
+                )}
+            </Query>
+
+
         </div>
     );
 }

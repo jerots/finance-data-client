@@ -4,9 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient from "apollo-boost";
+import { defaults } from "./resolvers"
 
 export const client = new ApolloClient({
-  uri: process.env.NODE_ENV === "production" ? "https://api.sonofong.com/" : "http://localhost:4000/"
+  uri: process.env.NODE_ENV === "production" ? "https://api.sonofong.com/" : "http://localhost:4000/",
+  clientState: {
+    defaults,
+  }
 });
 
 
