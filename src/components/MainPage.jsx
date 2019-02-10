@@ -8,7 +8,7 @@ const styles = theme => ({
   fullheight: {
     height: "100%"
   },
- 
+
   positive: {
     color: "green"
   },
@@ -23,17 +23,17 @@ function MainPage(props) {
   const positive = (num) => {
     return num > 0;
   };
-  
-  
+
+
   const marginOfSafety = () => {
     const difference = ticker.dcf - ticker.profile.Price
     const mos = difference / ticker.profile.Price * 100;
-    return mos.toFixed(2) ;
-  } 
-  
+    return mos.toFixed(2);
+  }
+
   return (
     <div className={classes.root}>
-      <Grid container spacing={16}>
+      <Grid container spacing={0}>
         <Grid item xs={12} sm={12}>
           <Card className={classes.fullheight}>
             <CardContent>
@@ -45,7 +45,9 @@ function MainPage(props) {
             </CardContent>
           </Card>
         </Grid>
-        <SimpleTabs ticker={ticker} />
+        <Grid item xs={12} sm={12}>
+          <SimpleTabs ticker={ticker} />
+        </Grid>
       </Grid>
     </div>
   );

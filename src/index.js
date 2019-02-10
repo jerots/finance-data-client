@@ -7,7 +7,8 @@ import ApolloClient from "apollo-boost";
 import { defaults } from "./resolvers"
 
 export const client = new ApolloClient({
-  uri: process.env.NODE_ENV === "production" ? "https://api.sonofong.com/" : "http://localhost:4000/",
+  // uri: process.env.NODE_ENV === "production" ? "https://api.sonofong.com/" : "http://localhost:4000/",
+  uri: "https://api.sonofong.com/",
   clientState: {
     defaults,
   }
