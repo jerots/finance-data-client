@@ -9,6 +9,8 @@ import IncomeStatementTab from './IncomeStatementTab';
 import { Query, ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
 import TechnicalTab from './TechnicalTab';
+import BalanceSheetTab from './BalanceSheetTab';
+import CashFlowStatement from './CashFlowStatement';
 
 function TabContainer(props) {
     return (
@@ -48,7 +50,7 @@ function SimpleTabs(props) {
                             <ApolloConsumer>
                                 {client => (
                                     <Tabs scrollButtons="auto" variant="scrollable" value={tabValue} onChange={(event, newValue) => client.writeData({data: { tabValue: newValue }})}>
-                                        <Tab label="Technical Tab" />
+                                        <Tab label="Technicals" />
                                         <Tab label="Income Statement" />
                                         <Tab label="Balance Sheet" />
                                         <Tab label="Cashflow statement" />
@@ -58,8 +60,8 @@ function SimpleTabs(props) {
                         </AppBar>
                         {tabValue === 0 && <TabContainer><TechnicalTab ticker={ticker} /></TabContainer>}
                         {tabValue === 1 && <TabContainer><IncomeStatementTab ticker={ticker} /></TabContainer>}
-                        {tabValue === 2 && <TabContainer>Balance Sheet</TabContainer>}
-                        {tabValue === 3 && <TabContainer>Cashflow statement</TabContainer>}
+                        {tabValue === 2 && <TabContainer><BalanceSheetTab ticker={ticker}></BalanceSheetTab></TabContainer>}
+                        {tabValue === 3 && <TabContainer><CashFlowStatement ticker={ticker}></CashFlowStatement></TabContainer>}
                     </div>
                 )}
             </Query>

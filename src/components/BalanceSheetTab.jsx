@@ -5,14 +5,15 @@ const styles = theme => ({
     root: {
 
     },
+
 });
 
-function IncomeStatementTab(props) {
-    const { classes, ticker: { profile: {companyName}, incomeStatement } } = props;
-    console.log(incomeStatement);
-    const years = Object.keys(incomeStatement.Basic);
+function BalanceSheetTab(props) {
+    const { classes, ticker: { profile: { companyName }, balanceSheet } } = props;
+    console.log(balanceSheet);
+    const years = Object.keys(balanceSheet["Accounts payable"]);
     // const rows = ["Revenue", "Net income"];
-    const rows = Object.keys(incomeStatement);
+    const rows = Object.keys(balanceSheet);
     return (
 
         <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -23,13 +24,13 @@ function IncomeStatementTab(props) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell key="name">{companyName}</TableCell>
-                                    { years.map(year => (<TableCell key={year}>{year}</TableCell>)) }
+                                    {years.map(year => (<TableCell key={year}>{year}</TableCell>))}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {
                                     rows.map(key => {
-                                        const row = incomeStatement[key];
+                                        const row = balanceSheet[key];
                                         return (
                                             <TableRow key={key}>
                                                 <TableCell key={key}>{key}</TableCell>
@@ -49,4 +50,4 @@ function IncomeStatementTab(props) {
     );
 }
 
-export default withStyles(styles)(IncomeStatementTab);
+export default withStyles(styles)(BalanceSheetTab);
