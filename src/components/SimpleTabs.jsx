@@ -25,6 +25,7 @@ TabContainer.propTypes = {
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        width: "100%",
         backgroundColor: theme.palette.background.paper,
     },
 });
@@ -46,7 +47,7 @@ function SimpleTabs(props) {
                         <AppBar position="static">
                             <ApolloConsumer>
                                 {client => (
-                                    <Tabs value={tabValue} onChange={(event, newValue) => client.writeData({data: { tabValue: newValue }})}>
+                                    <Tabs scrollButtons="auto" variant="scrollable" value={tabValue} onChange={(event, newValue) => client.writeData({data: { tabValue: newValue }})}>
                                         <Tab label="Technical Tab" />
                                         <Tab label="Income Statement" />
                                         <Tab label="Balance Sheet" />
