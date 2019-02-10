@@ -24,12 +24,16 @@ const LOAD_TICKER = gql`
     }
         }
 `
+
+const GET_TICKER_NAME = gql`
+  {
+    tickerName @client
+  }
+`
+
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      tickerName: "AAPL"
-    }
     this.handleChange = this.handleChange.bind(this);
     this.debouncedSetState = _.debounce(this.setState, 500);
   }
@@ -48,37 +52,37 @@ class App extends Component {
         <ApolloProvider client={client}>
           <div className="App">
             <HeaderBar handleChange={this.handleChange} />
-            <Query query={LOAD_TICKER} variables={{ tickerName: this.state.tickerName }}>
-              {({ loading, error, data }) => {
-                const ticker = _.get(data, "ticker");
+            <Query query={GET_TICKER_NAME}>
+              {({ loading, error, data: { tickerName } }) => (
+                <Query query={LOAD_TICKER} variables={{ tickerName: tickerName }}>
+                  {({ loading, error, data }) => {
+                    const ticker = _.get(data, "ticker");
 
-                if (loading) {
-                  return <LinearIndeterminate varient="indeterminate" />
-                }
+                    if (loading) {
+                      return <LinearIndeterminate varient="indeterminate" />
+                    }
 
-                ticker.symbol = ticker.name
-                if (!ticker || error) return <p>Stock not found</p>;
-
-
-
-                return (
-                  <div>
-                    <MainPage ticker={ticker} />
-                  </div>
-                )
-              }}
+                    ticker.symbol = ticker.name
+                    if (!ticker || error) return <p>Stock not found</p>;
 
 
+
+                    return (
+                      <div>
+                        <MainPage ticker={ticker} />
+                      </div>
+                    )
+                  }}
+                </Query>
+              )}
             </Query>
-            <div>
-
-            </div>
+  
           </div>
         </ApolloProvider>
       </MuiThemeProvider>
 
-    );
-  }
-}
-
-export default App;
+        );
+      }
+    }
+    
+    export default App;

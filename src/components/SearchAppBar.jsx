@@ -7,6 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import { ApolloConsumer } from 'react-apollo';
 
 const styles = theme => ({
   root: {
@@ -69,32 +70,43 @@ const styles = theme => ({
 });
 
 function SearchAppBar(props) {
-  const { classes, handleChange } = props;
+  const { classes } = props;
 
   return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              S U P E R F I N
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            S U P E R F I N
           </Typography>
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                onChange={handleChange}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
+          <div className={classes.grow} />
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
             </div>
-          </Toolbar>
-        </AppBar>
-      </div>
+            <ApolloConsumer>
+              {client => {
+                return (
+                  <InputBase
+                    placeholder="Search…"
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      if (!value || !value.trim()) return
+                      client.writeData({ data: { tickerName: value } })
+                    }}
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                  />
+                )
+              }
+              }
+            </ApolloConsumer>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
 
