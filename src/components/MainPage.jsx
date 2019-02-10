@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 import { Grid, CardContent, Card } from '@material-ui/core';
+import SimpleTabs from './SimpleTabs';
 
 const styles = theme => ({
   fullheight: {
     height: "100%"
   },
-  tradingviewwidget: {
-    height: "500px"
-  },
+ 
   positive: {
     color: "green"
   },
@@ -47,13 +45,7 @@ function MainPage(props) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={12} md={9} lg={6}>
-          <Card className={classes.fullheight}>
-            <CardContent className={classes.tradingviewwidget}>
-              <TradingViewWidget symbol={ticker.symbol} theme={Themes.DARK} autosize />
-            </CardContent>
-          </Card>
-        </Grid>
+        <SimpleTabs ticker={ticker} />
       </Grid>
     </div>
   );
