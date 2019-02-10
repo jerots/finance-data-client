@@ -7,6 +7,10 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import Select from 'react-select';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import * as _ from "lodash";
 
 const styles = theme => ({
   root: {
@@ -68,33 +72,64 @@ const styles = theme => ({
   },
 });
 
+const LOAD_TICKERS = gql`
+  query {
+    tickers
+  }
+`
+
+
 function SearchAppBar(props) {
   const { classes, handleChange } = props;
 
+
   return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              S U P E R F I N
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            S U P E R F I N
           </Typography>
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
+
+          <div className={classes.grow} />
+          <Query query={LOAD_TICKERS}>
+            {({ loading, error, data }) => {
+
+              const tickers = _.get(data, "tickers");
+
+              const options = [{label:"a", value:"a"}, {label:"b", value:"b"}]
+
+              // const options = _.map(tickers, ticker => (
+              //   { label: ticker.Name, value: ticker.Ticker }
+              // ))
+              console.log(options);
+              
+              return (<Select
+                value={"AAPL"}
                 onChange={handleChange}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div>
-          </Toolbar>
-        </AppBar>
-      </div>
+                options={options}
+
+              />)
+              return (
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search…"
+                    onChange={handleChange}
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                  />
+                </div>
+              )
+            }}
+          </Query>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
 
