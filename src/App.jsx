@@ -51,13 +51,20 @@ class App extends Component {
             <Query query={LOAD_TICKER} variables={{ tickerName: this.state.tickerName }}>
               {({ loading, error, data }) => {
                 const ticker = _.get(data, "ticker");
-                if (!ticker || error) return <p>Stock not found</p>;
-                
+                console.log(loading, ticker, error)
+
+                if (loading) {
+                  return <LinearIndeterminate varient="indeterminate" />
+                }
+
                 ticker.symbol = ticker.name
+                if (!ticker || error) return <p>Stock not found</p>;
+
+
 
                 return (
                   <div>
-                    {loading ? <LinearIndeterminate varient="indeterminate" /> : <MainPage ticker={ticker} />}
+                    <MainPage ticker={ticker} />
                   </div>
                 )
               }}
