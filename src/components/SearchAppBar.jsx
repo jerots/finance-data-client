@@ -8,6 +8,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { ApolloConsumer } from 'react-apollo';
+import SearchAutocomplete from './SearchAutocomplete';
 
 const styles = theme => ({
   root: {
@@ -49,24 +50,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%',
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 120,
-      '&:focus': {
-        width: 200,
-      },
-    },
-  },
+  
 });
 
 function SearchAppBar(props) {
@@ -84,25 +68,7 @@ function SearchAppBar(props) {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <ApolloConsumer>
-              {client => {
-                return (
-                  <InputBase
-                    placeholder="Search…"
-                    onChange={(event) => {
-                      const value = event.target.value;
-                      if (!value || !value.trim()) return
-                      client.writeData({ data: { tickerName: value } })
-                    }}
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                  />
-                )
-              }
-              }
-            </ApolloConsumer>
+            <SearchAutocomplete />
           </div>
         </Toolbar>
       </AppBar>
