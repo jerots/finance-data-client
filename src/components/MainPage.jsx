@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { Grid, CardContent, Card } from '@material-ui/core';
-import SimpleTabs from './SimpleTabs';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import { Grid, CardContent, Card } from "@material-ui/core";
+import SimpleTabs from "./SimpleTabs";
 
 const styles = theme => ({
   fullheight: {
@@ -20,16 +20,15 @@ const styles = theme => ({
 function MainPage(props) {
   const { classes, ticker } = props;
 
-  const positive = (num) => {
+  const positive = num => {
     return num > 0;
   };
 
-
-  const marginOfSafety = () => {
-    const difference = ticker.dcf - ticker.profile.Price
-    const mos = difference / ticker.profile.Price * 100;
-    return mos.toFixed(2);
-  }
+  // const marginOfSafety = () => {
+  //   const difference = ticker.dcf - ticker.profile.Price;
+  //   const mos = (difference / ticker.profile.Price) * 100;
+  //   return mos.toFixed(2);
+  // };
 
   return (
     <div className={classes.root}>
@@ -38,8 +37,16 @@ function MainPage(props) {
           <Card className={classes.fullheight}>
             <CardContent>
               <h1>{ticker.profile.companyName.toUpperCase()}</h1>
-              <h2 className={positive(ticker.profile.Changes) ? classes.positive : classes.negative}>Price: ${ticker.profile.Price} {ticker.profile.ChangesPerc}</h2>
-              <h3 className={positive(marginOfSafety()) ? classes.positive : classes.negative}>Intrinsic Value (DCF): ${ticker.dcf} (MOS: {marginOfSafety()}%)</h3>
+              <h2
+                className={
+                  positive(ticker.profile.Changes)
+                    ? classes.positive
+                    : classes.negative
+                }
+              >
+                Price: ${ticker.profile.Price} {ticker.profile.ChangesPerc}
+              </h2>
+              {/* <h3 className={positive(marginOfSafety()) ? classes.positive : classes.negative}>Intrinsic Value (DCF): ${ticker.dcf} (MOS: {marginOfSafety()}%)</h3> */}
               <p>{ticker.profile.description}</p>
               <p>{ticker.description}</p>
             </CardContent>
@@ -54,7 +61,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  ticker: PropTypes.object.isRequired,
+  ticker: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(MainPage);

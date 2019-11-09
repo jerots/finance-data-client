@@ -9,16 +9,18 @@ WORKDIR /usr/src/app
 
 RUN npm install -g serve
 
-
 COPY package*.json ./
+COPY yarn.lock ./
 
-RUN npm install
+RUN npm i -g yarn
+
+RUN yarn
 # If you are building your code for production
 # RUN npm install --only=production
 
 COPY . .
 
-RUN npm run build
+RUN yarn run build
 
 EXPOSE 5000
 
