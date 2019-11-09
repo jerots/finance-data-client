@@ -25,8 +25,8 @@ function MainPage(props) {
   };
 
   // const marginOfSafety = () => {
-  //   const difference = ticker.dcf - ticker.profile.Price;
-  //   const mos = (difference / ticker.profile.Price) * 100;
+  //   const difference = ticker.dcf - ticker.profile.price;
+  //   const mos = (difference / ticker.profile.price) * 100;
   //   return mos.toFixed(2);
   // };
 
@@ -44,7 +44,7 @@ function MainPage(props) {
                     : classes.negative
                 }
               >
-                Price: ${ticker.profile.Price} {ticker.profile.ChangesPerc}
+                Price: ${ticker.profile.price} {ticker.profile.ChangesPerc}
               </h2>
               {/* <h3 className={positive(marginOfSafety()) ? classes.positive : classes.negative}>Intrinsic Value (DCF): ${ticker.dcf} (MOS: {marginOfSafety()}%)</h3> */}
               <p>{ticker.profile.description}</p>
