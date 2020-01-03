@@ -12,15 +12,15 @@ RUN npm install -g serve
 COPY package*.json ./
 COPY yarn.lock ./
 
-RUN npm i -g yarn
+# RUN npm i -g yarn
 
-RUN yarn
+# RUN yarn
 # If you are building your code for production
-# RUN npm install --only=production
+RUN npm install --only=production
 
 COPY . .
 
-RUN yarn run build
+RUN npm run build
 
 EXPOSE 5000
 
